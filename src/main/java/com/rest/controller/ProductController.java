@@ -7,8 +7,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +32,7 @@ public class ProductController {
 	
 	private static String INVALID_CATEGORY = "Invalid category";
 	
-	@RequestMapping(value = "/products/{category}", method = RequestMethod.GET)
+	@GetMapping(value = "/products/{category}")
 	public @ResponseBody XmlDataDTO findByCategory(@PathVariable("category") String categoryName) {
 		final Category category = categoryRepository.findByName(categoryName);
 		if (category != null) {
