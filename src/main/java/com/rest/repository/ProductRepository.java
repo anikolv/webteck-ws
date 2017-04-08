@@ -11,6 +11,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
 	  Product findById(Long id);
 	  
-	  List<Product> findByCategory(Category category);
+	  List<Product> findByCategoryAndQuantityGreaterThan(Category category, int qantity);
 	  
 }
