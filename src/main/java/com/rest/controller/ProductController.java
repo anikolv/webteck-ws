@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.domain.Category;
 import com.rest.domain.Product;
-import com.rest.domain.ProductDTO;
-import com.rest.domain.XmlDataDTO;
 import com.rest.repository.CategoryRepository;
 import com.rest.repository.ProductRepository;
+
+import dto.ProductRequestDTO;
+import dto.ProductResponseDTO;
 
 @RestController
 public class ProductController {
@@ -35,18 +36,18 @@ public class ProductController {
 	private static String INVALID_CATEGORY = "Invalid category";
 	
 	@GetMapping(value = "/products/findByCategory/{category}")
-	public @ResponseBody XmlDataDTO findByCategory(@PathVariable("category") String categoryName) {
+	public @ResponseBody ProductResponseDTO findByCategory(@PathVariable("category") String categoryName) {
 		final Category category = categoryRepository.findByName(categoryName);
 		if (category != null) {
 			final List<Product> products = productRepository.findByCategoryAndQuantityGreaterThan(category,
 					BigInteger.ZERO.intValue());
 			if (!products.isEmpty()) {
-				return new XmlDataDTO(products, OK);
+				return new ProductResponseDTO(products, OK);
 			} else {
-				return new XmlDataDTO(ERROR, EMPTY_RESULT);
+				return new ProductResponseDTO(ERROR, EMPTY_RESULT);
 			}
 		} else {
-			return new XmlDataDTO(ERROR, INVALID_CATEGORY);
+			return new ProductResponseDTO(ERROR, INVALID_CATEGORY);
 		}
 	}
 	
@@ -56,12 +57,12 @@ public class ProductController {
 	}
 	
 	@GetMapping(value = "/products/getAll")
-	public @ResponseBody XmlDataDTO getAllProducts() {
-		return new XmlDataDTO((List<Product>) productRepository.findAll(), OK);
+	public @ResponseBody ProductResponseDTO getAllProducts() {
+		return new ProductResponseDTO((List<Product>) productRepository.findAll(), OK);
 	}
 	
 	@PostMapping(value = "/products/add")
-	public void addProduct(@RequestBody ProductDTO productDTO) {
+	public void addProduct(@RequestBody ProductRequestDTO productDTO) {
 		
 		Product product = new Product();
 		product.setCategory(categoryRepository.findOne(productDTO.getCategoryId()));
