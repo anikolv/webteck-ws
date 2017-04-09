@@ -1,34 +1,37 @@
 package com.rest.domain;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "request")
 public class ConvertCurrencyRequestDTO {
 	
+	@XmlElement
 	private String fromCurrency;
 	
+	@XmlElement
 	private String toCurrency;
 	
+	@XmlElement
 	private double amount = 0;
+	
+	public ConvertCurrencyRequestDTO(String fromCurrency, String toCurrency, double amount) {
+		this.fromCurrency = fromCurrency;
+		this.toCurrency = toCurrency;
+		this.amount = amount;
+	}
+	
+	public ConvertCurrencyRequestDTO(){}
 
 	public String getFromCurrency() {
 		return fromCurrency;
-	}
-
-	public void setFromCurrency(String fromCurrency) {
-		this.fromCurrency = fromCurrency;
 	}
 
 	public String getToCurrency() {
 		return toCurrency;
 	}
 
-	public void setToCurrency(String toCurrency) {
-		this.toCurrency = toCurrency;
-	}
-
 	public double getAmount() {
 		return amount;
-	}
-
-	public void setAmount(double amount) {
-		this.amount = amount;
 	}
 }
