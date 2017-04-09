@@ -1,50 +1,23 @@
 package com.rest.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
-@Table(name="products")
 @XmlRootElement(name="product")
-public class Product {
-	
-	@Id 
-	@GeneratedValue
-	private Long id;
-	
+public class ProductDTO {
+
 	private String name;	
 	
 	private String description;
 	
 	private Boolean visible;
-	
-	@Column(name="price_bgn")
+
 	private float price;
+
+	private Long categoryId;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
-	@JoinColumn(name="category")
-	private Category category;
-	
-	@Column(name="qty")
 	private	int quantity;
 	
 	private String image;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -78,12 +51,12 @@ public class Product {
 		this.price = price;
 	}
 
-	public Category getCategory() {
-		return category;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public int getQuantity() {
