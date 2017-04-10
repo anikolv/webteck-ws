@@ -3,12 +3,17 @@ package com.rest.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="carts")
+@XmlRootElement(name="order")
 public class Order {
 	
 	@Id
@@ -20,6 +25,12 @@ public class Order {
 	private String status;
 	
 	private Date paidAt;
+	
+	private Date createdAt;
+	
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "order")
+	@XmlElement(name = "details")
+	private OrderDetail orderDetails;
 
 	public Long getId() {
 		return id;
@@ -49,7 +60,16 @@ public class Order {
 		return paidAt;
 	}
 
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	public void setPaidAt(Date paidAt) {
 		this.paidAt = paidAt;
 	}
+	
 }
