@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 @Table(name="products")
 @XmlRootElement(name="product")
@@ -29,7 +32,7 @@ public class Product {
 	@Column(name="price_bgn")
 	private float price;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@ManyToOne(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinColumn(name="category")
 	private Category category;
 	

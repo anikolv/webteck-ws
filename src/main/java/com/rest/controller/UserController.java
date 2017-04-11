@@ -48,6 +48,7 @@ public class UserController {
 		user.setAddress(userDTO.getAddress());
 		user.setEmail(userDTO.getEmail());
 		user.setName(userDTO.getName());
+		user.setPassword(userDTO.getPassword());
 		
 		userRepository.save(user);
 	}

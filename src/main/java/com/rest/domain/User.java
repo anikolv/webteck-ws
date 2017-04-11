@@ -1,5 +1,7 @@
 package com.rest.domain;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,13 +27,15 @@ public class User {
 	
 	private Boolean active;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="role")
 	private Role role;
 	
 	private String name;
 	
 	private String address;
+	
+	private Date createdAt;
 
 	public Long getId() {
 		return id;
@@ -87,5 +91,13 @@ public class User {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 }
