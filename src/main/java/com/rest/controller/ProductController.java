@@ -74,5 +74,10 @@ public class ProductController {
 		
 		productRepository.save(product);
 	}
+	
+	@GetMapping(value = "/products/findById/{id}")
+	public Product findById(@PathVariable("id") Long id) {
+		return productRepository.findOne(id);
+	}
 
 }

@@ -1,11 +1,13 @@
 package com.rest.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,11 +28,17 @@ public class Order {
 	
 	private Date paidAt;
 	
-	private Date createdAt;
+	private Date createdAt = new Date();
+	
+	private Date updatedAt = new Date();
 	
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "order")
 	@XmlElement(name = "details")
 	private OrderDetail orderDetails;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+	@XmlElement(name = "products")
+	private List<OrderProduct> orderProducts;
 
 	public Long getId() {
 		return id;
@@ -71,5 +79,8 @@ public class Order {
 	public void setPaidAt(Date paidAt) {
 		this.paidAt = paidAt;
 	}
-	
+
+	public void setOrderProducts(List<OrderProduct> orderProducts) {
+		this.orderProducts = orderProducts;
+	}
 }
